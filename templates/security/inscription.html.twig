@@ -1,0 +1,20 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+S'inscrire : créer un compte ArchHive.
+{% endblock %}
+
+{% block body %}
+    <div class="block">
+        <h3>Inscription : Créer votre compte</h3>
+        <div class="container register_form_container" style="margin: 100px;">
+            {{ form_start(register_form_view) }}
+            {{ form_rest(register_form_view) }}
+            <button class="btn btn-primary mr-10">Je m'inscrits !</button>
+            <small>
+                <a href="{{ path('connexion') }}">Vous avez déjà un compte ?</a>
+            </small>
+            {{ form_end(register_form_view) }}
+    </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+Se connecter : accès à mon compte.
+{% endblock %}
+
+{% block body %} 
+
+    <form method="post">
+
+        {% if app.user %}
+            <div class="mb-3">
+                Vous êtes connecté, {{ app.user.userIdentifier }} !, <a href="{{ path('app_logout') }}">Se déconnecter</a>
+            </div>
+        {% endif %}
+
+        <h3>Connexion : identifiez-vous.</h3>
+
+    <div class="container register_form_container" style="margin: 100px;">
+        <form method="post">
+
+            <div class="form-row">
+                <label for="inputEmail">Votre email :</label>
+                <input type="email" placeholder="Exemple : michel.dupont@laposte.fr" value="{{ last_username }}" name="_username" id="username" required autofocus>
+            </div>
+
+            <div class="form-row">
+                <label for="inputPassword">Votre mot de passe :</label>
+                <input type="password" name="_password" id="password" required>
+            </div>
+
+            <div class="form-row">
+                <label>
+                    <input type="checkbox" name="_remember_me">
+                    Se souvenir de moi
+                </label>
+            </div>
+
+            {% if error %}
+
+                <ul class="form-errors mb-20">
+                    <li>{{ error.messageKey|trans(error.messageData, 'security') }}</li>
+                </ul>
+
+            {% endif %}
+
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+            <button class="btn btn-primary mr-10">Connectez-vous !</button>
+            <small>
+                <a href="{{ path('inscription') }}">Pas encore inscrit(e) ?</a>
+            </small>
+        </form>
+    </div>
+
+ {% endblock %}

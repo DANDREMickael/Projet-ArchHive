@@ -1,0 +1,75 @@
+<main class="d-flex flex-nowrap">
+
+{% set route_locale = app.request.attributes.get("_route") %} {# Récupère le nom de la route de la page actuelle #}
+
+<div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px; height: 1000px;">
+    <a href="{{path('accueil')}}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+      <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+      <span class="fs-4">ArchHive</span>
+    </a>
+    <hr>
+    <ul class="nav nav-pills flex-column mb-auto">
+      <li class="nav-item">
+        <a href="{{path('accueil')}}" class= "nav-link text-white
+          {{ route_locale == "index" ? " active" : "" }}"> {# Ajoute la classe active à la balise si la page correspond au bouton #}
+
+          <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="3#home"></use></svg>
+          Accueil
+        </a>
+      </li>
+      <li>
+        <a href="{{path('listelivres')}}" class="nav-link text-white
+          {{ route_locale == "listelivres" ? " active" : "" }}">
+          <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
+          Livres
+        </a>
+      </li>
+      <li>
+        <a href="{{path('connexion')}}" class="nav-link text-white
+          {{ route_locale == "connexion" ? " active" : "" }}">
+          <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
+          Se connecter
+        </a>
+      </li>
+      <li>
+        <a href="{{path('inscription')}}" class="nav-link text-white
+        {{ route_locale == "inscription" ? " active" : "" }}">
+          <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
+          S'inscrire
+        </a>
+      </li>
+    </ul>
+    <hr>
+
+      <div class="dropdown">
+        <a href="{{ path('userspace') }}" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+          <img src=
+
+          {%- if !is_granted('ROLE_USER') -%}
+            "https://github.com/mdo.png"
+          {%- else -%}
+            "../public/img/ppdéconnecté.svg"
+          {%- endif -%}
+
+           alt="" width="32" height="32" class="rounded-circle me-2">
+          <strong>Utilisateur</strong>
+        </a>
+
+        {%- if is_granted('ROLE_USER') -%}
+          <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+            <li><a class="dropdown-item" href="{{path('parametres')}}">Paramètres</a></li>
+            <li><a class="dropdown-item" href="{{path('profile')}}">Mon profil</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="{{path('logout')}}">Se déconnecter</a></li>
+          </ul>
+        {%- else -%}
+          <li><a class="dropdown-item" href="{{path('connexion')}}">Se connecter</a></li>
+            <li><a class="dropdown-item" href="{{path('inscription')}}">S'inscrire</a></li>
+        {%- endif -%}
+
+      </div>
+
+  </div>
+</main>
+
+<script src="/docs/5.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
