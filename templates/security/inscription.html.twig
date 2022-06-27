@@ -5,9 +5,11 @@ S'inscrire : créer un compte ArchHive.
 {% endblock %}
 
 {% block body %}
-    <div class="block">
-        <h3>Inscription : Créer votre compte</h3>
-        <div class="container register_form_container" style="margin: 100px;">
+    <div class="bginscrip">
+        <div class="container" style="margin: 5%;">
+            <h3>Inscription : Créer votre compte</h3>
+        </div>
+        <div class="container register_form_container" style="margin: auto;">
             {{ form_start(register_form_view) }}
             {{ form_rest(register_form_view) }}
             <button class="btn btn-primary mr-10">Je m'inscrits !</button>
@@ -15,6 +17,6 @@ S'inscrire : créer un compte ArchHive.
                 <a href="{{ path('connexion') }}">Vous avez déjà un compte ?</a>
             </small>
             {{ form_end(register_form_view) }}
-    </div>
+        </div>
     </div>
 {% endblock %}

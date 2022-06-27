@@ -2,23 +2,21 @@
 
 namespace App\Controller;
 
+use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Cookie;
+use Doctrine\ORM\EntityManagerInterface;
+use App\Security\LoginFormAuthenticator;
 use App\Services\LoginVerifier;
+use Doctrine\DBAL\Query;
+use App\Entity\User;
 use DateTime;
 
 class ConnexionController extends AbstractController
@@ -34,23 +32,41 @@ class ConnexionController extends AbstractController
 
     //Page de connexion
     #[Route(path: '/login', name:'connexion', methods: ['GET', 'PUT', 'POST'])]
-    public function connexion(AuthenticationUtils $authenticationUtils): Response
+    public function connexion(Request $request, AuthenticationUtils $authenticationUtils, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, LoginFormAuthenticator $authenticator): Response
     {
-        {
-
-            if ($this->getUser()) 
+            //Redirige automatiquement l'utilisateur vers une page différente si jamais il est déjà identifié et qu'il tente d'aller sur la page contenant le formulaire de connexion.
+            if ($this->getUser())
             {
                 return $this->redirectToRoute('profile');
+            } 
+            else 
+            {
+                $error = $authenticationUtils->getLastAuthenticationError();
+                $lastUsername = $authenticationUtils->getLastUsername();
+    
+                return $this->render('security/connexion.html.twig', [
+                    'controller_name'=> 'ConnexionController',
+                    'last_username' => $lastUsername,
+                    'error'         => $error,
+                ]);
+
+                // $mdp=getPassword($user);
+                // $userPasswordHasher->hashPassword($user, $mdp->get('mot_de_passe')->getData());
+                // if($mdp === $userPasswordHasher)
+                // {
+                //     return $userAuthenticator->authenticateUser(
+                //         $user,
+                //         $authenticator,
+                //         $request
+                //     );
+                // }                     
             }
-    
-            $error = $authenticationUtils->getLastAuthenticationError();
-            $lastUsername = $authenticationUtils->getLastUsername();
-    
-            return $this->render('security/connexion.html.twig', [
-                'last_username' => $lastUsername,
-                'error'         => $error,
-            ]);
-        }
+    }
+
+    #[Route(path: '/logout', name: 'logout')]
+    public function logout(): void
+    {
+        //throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 }
 

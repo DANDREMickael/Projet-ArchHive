@@ -13,9 +13,6 @@ class Livre
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'integer')]
-    private $id_livre;
-
     #[ORM\Column(type: 'string', length: 255)]
     private $titre;
 
@@ -25,21 +22,12 @@ class Livre
     #[ORM\Column(type: 'datetime', nullable: true)]
     private $date_parution;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $image;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getIdLivre(): ?int
-    {
-        return $this->id_livre;
-    }
-
-    public function setIdLivre(int $id_livre): self
-    {
-        $this->id_livre = $id_livre;
-
-        return $this;
     }
 
     public function getTitre(): ?string
@@ -74,6 +62,18 @@ class Livre
     public function setDateParution(?\DateTimeInterface $date_parution): self
     {
         $this->date_parution = $date_parution;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }

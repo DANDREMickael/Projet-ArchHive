@@ -4,10 +4,12 @@ namespace App\Form;
 
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\IsTrue;
@@ -25,37 +27,34 @@ class RegistrationFormType extends AbstractType
             ->add('nom', TextType::class, 
             [
                 'label' => 'Votre NOM :',
-                'attr' => ['placeholder' => 'Exemple : Neymar'],
+                'attr' => ['placeholder' => 'Exemple : Capasse'],
                 'constraints' => 
                 [
                     //Contrainte de champs non vide
-                    New NotBlank(message: 'Comment ça "aucun nom" ?'),
+                    New NotBlank(message: 'Vous n\'avez pas entré votre nom'),
                 ]
             ])
 
-            ->add('Prenom', TextType::class, 
+            ->add('prenom', TextType::class, 
             [
                 'label' => 'Votre Prénom :',
-                'attr' => ['placeholder' => 'Exemple : Jean'],
+                'attr' => ['placeholder' => 'Exemple : Michel'],
                 'constraints' => 
                 [
-                    New NotBlank(message: 'Comment ça aucun nom ?'),
+                    New NotBlank(message: 'Vous n\'avez pas entré votre prénom'),
                 ]
             ])
 
-            ->add('Date_de_naissance', DateType::class, 
+            ->add('dateNaissance', BirthdayType::class, 
             [
                 'label' => 'Votre date de naissance :',
-                'years' => range(date('Y'), date('Y') -120),
-                'months' => range(1, 12),
-                'days' => range(1, 31),
             ])
 
-            ->add('Email', EmailType::class,
+            ->add('email', EmailType::class,
             [
                 'trim' => true,        //Supprime les espaces
                 'label' => 'Votre Email :',
-                'attr' => ['placeholder' => 'Exemple : jeaneymar@tuezmoi.rip'],
+                'attr' => ['placeholder' => 'Exemple : michelcapasse@gmail.com'],
                 'constraints' => 
                 [
                     New NotBlank
@@ -96,28 +95,28 @@ class RegistrationFormType extends AbstractType
                 ]
             ])
 
-            ->add('Adresse', TextType::class,
+            ->add('adresse', TextType::class,
             [
                 'trim' => true,
                 'label' => 'Votre Adresse :',
                 'attr' => ['placeholder' => 'N° de voie et Rue'],
             ])
 
-            ->add('Code_Postal', TextType::class,
+            ->add('codePostal', TextType::class,
             [
-                'trim' => true,
+                'trim' => false,
                 'label' => 'Votre CP :',
-                'attr' => ['placeholder' => 'Exemple : 62200'],
+                'attr' => ['placeholder' => 'Exemple : 62200', 'maxlength' => 5],
             ])
 
-            ->add('Ville', TextType::class,
+            ->add('ville', CountryType::class,
             [
                 'trim' => true,
                 'label' => 'Votre Ville :',
                 'attr' => ['placeholder' => 'Exemple : Boulogne'],
             ])
 
-            ->add('CGU', CheckBoxType::class, 
+            ->add('cgu', CheckBoxType::class, 
             [
                 'label' => 'J\'ai lu et j\'accepte les conditions générales et je suis d\'accord avec la Politique de Confidentialité concernant le traitement des données.',
                 'constraints' =>
@@ -128,11 +127,6 @@ class RegistrationFormType extends AbstractType
                         'message' => 'Vous devez accepter les Conditions d\'utilisation.',
                     ]),
                 ]
-            ])
-
-            ->add('btnIncription', SubmitType::class, 
-            [
-                'label' => 'Je m\'inscris !'
             ]);
     }
 

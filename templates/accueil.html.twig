@@ -4,6 +4,20 @@
 ArchHive : emprunt de livre facile et rapide.
 {% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}      {# Permet de charger le script et la feuille de style déclarés dans le template parent qui est base.html.twig #}
+    {{ encore_entry_link_tags('accueil') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('accueil') }}
+{% endblock %}
+
 {% block body %} 
-<h1>Insérer contenu Accueil</h1>
+
+<div class="bgaccueil">
+    <h1 class="brand"><span>ArchHive</span>
+    <p class="slogan">L'emprunt de livres simple et rapide !</p>
+</div>
  {% endblock %}

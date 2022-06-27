@@ -18,9 +18,10 @@ security:
             provider: app_user_provider
             custom_authenticator: App\Security\LoginFormAuthenticator
             form_login:
-                login_path: login
-                check_path: login
+                login_path: connexion
+                check_path: connexion
                 enable_csrf: true
+            entry_point: form_login
             remember_me:
                 secret: '%kernel.secret'
             logout:
@@ -40,8 +41,8 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY}
-        # - { path: '^/profile', roles: [ROLE_USER, ROLE_ADMIN] }
+        # - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY}
+        - { path: ^/profile, roles: ROLE_USER }
 
 when@test:
     security:

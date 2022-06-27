@@ -19,7 +19,7 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
 {
     use TargetPathTrait;
 
-    public const LOGIN_ROUTE = 'login';
+    public const LOGIN_ROUTE = 'connexion';
 
     private UrlGeneratorInterface $urlGenerator;
 
@@ -34,24 +34,39 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
 
         $request->getSession()->set(Security::LAST_USERNAME, $email);
 
+        // $dbname = "archhive";
+        // $dbuser = "root";
+        // $dbhost = "localhost";
+        // $dbpassword = "(zaOkfrac[XHy/GI";
+
+        // try {
+        //     $db = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpassword);
+        // } catch (PDOException $e) {
+        //     die("Erreur de connexion à la base de données : " . $e->getMessage());
+        // }
+        // $requete=query("SELECT * FROM user WHERE email = '".$email."' AND mot_de_passe = '".$password."'");
+        // $statement = $db->prepare($requete);
+        // $statement->bindParam("login", $_POST['login']);
+        // $statement->execute();
+
         return new Passport(
-            new UserBadge($email),
-            new PasswordCredentials($request->request->get('password', '')),
-            [
-                new CsrfTokenBadge('authenticate', $request->request->get('_csrf_token')),
-            ]
-        );
+        new UserBadge($email),
+        new PasswordCredentials($request->request->get('mot_de_passe', '')),
+        [
+            new CsrfTokenBadge('authenticate', $request->request->get('_csrf_token')),
+        ]);     
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
+        //Après connexion, redirige l'utilisateur sur la route demandée
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
             return new RedirectResponse($targetPath);
         }
 
-        // Exemple:
+        //Exemple:
         return new RedirectResponse($this->urlGenerator->generate('profile'));
-        throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
+        throw new \Exception('provide a valid redirect inside '.__FILE__);
     }
 
     protected function getLoginUrl(Request $request): string

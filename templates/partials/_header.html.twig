@@ -24,23 +24,59 @@
             Livres
           </a>
         </li>
-        <li class="nav-item">
-          <a href="{{path('connexion')}}" class="nav-link
-            {{ route_locale == "connexion" ? " active" : "" }}">
-            Se connecter
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="{{path('inscription')}}" class="nav-link
-            {{ route_locale == "inscription" ? " active" : "" }}">
-            S'inscrire
-          </a>
-        </li>
+
+        {%- if is_granted('ROLE_USER') -%}
+
+        {%- else -%}
+          <li class="nav-item">
+            <a href="{{path('connexion')}}" class="nav-link
+              {{ route_locale == "connexion" ? " active" : "" }}">
+              Se connecter
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{path('inscription')}}" class="nav-link
+              {{ route_locale == "inscription" ? " active" : "" }}">
+              S'inscrire
+            </a>
+          </li>
+        {%- endif -%}
+
       </ul>
-      <form class="d-flex">
-        <input class="form-control me-sm-2" type="text" placeholder="Rechercher">
-        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Rechercher</button>
-      </form>
+      
+      {%- if (route_locale == "listelivres") -%}
+        <form class="d-flex">
+          <input class="form-control me-sm-2" type="text" placeholder="Rechercher">
+          <button class="btn btn-secondary my-2 my-sm-0" type="submit">Rechercher</button>
+        </form>
+      {%- else -%}
+        <div class="dropdown">
+        <a href="{{ path('profile') }}" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+
+        {%- if is_granted('ROLE_USER') -%}
+          <a href="{{ path('profile') }}" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+          <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+          <strong>{{ app.user.prenom }}</strong>
+          <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+            <li><a class="dropdown-item" href="{{path('parametres')}}">Paramètres</a></li>
+            <li><a class="dropdown-item" href="{{path('profile')}}">Mon profil</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="{{path('logout')}}">Se déconnecter</a></li>
+          </ul>
+        {%- else -%}
+          <a href="{{ path('profile') }}" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+          <img src="{{ asset('build/img/ppdeconnecte.svg') }}" alt="" width="32" height="32" class="rounded-circle me-2">
+          <strong>Utilisateur</strong>
+        
+          <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+            <li><a class="dropdown-item" href="{{path('connexion')}}">Se connecter</a></li>
+            <li><a class="dropdown-item" href="{{path('inscription')}}">S'inscrire</a></li>
+          </ul>
+        {%- endif -%}
+
+        </div>
+      {%- endif -%}
+
     </div>
   </div>
 </nav>
