@@ -6,6 +6,7 @@ use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\ResetPasswordRequestRepository;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,6 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Cookie;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Security\LoginFormAuthenticator;
+use App\Repository\UserRepository;
 use App\Services\LoginVerifier;
 use Doctrine\DBAL\Query;
 use App\Entity\User;
@@ -43,23 +45,12 @@ class ConnexionController extends AbstractController
             {
                 $error = $authenticationUtils->getLastAuthenticationError();
                 $lastUsername = $authenticationUtils->getLastUsername();
-    
-                return $this->render('security/connexion.html.twig', [
-                    'controller_name'=> 'ConnexionController',
-                    'last_username' => $lastUsername,
-                    'error'         => $error,
-                ]);
-
-                // $mdp=getPassword($user);
-                // $userPasswordHasher->hashPassword($user, $mdp->get('mot_de_passe')->getData());
-                // if($mdp === $userPasswordHasher)
-                // {
-                //     return $userAuthenticator->authenticateUser(
-                //         $user,
-                //         $authenticator,
-                //         $request
-                //     );
-                // }                     
+                
+                    return $this->render('security/connexion.html.twig', [
+                        'controller_name'=> 'ConnexionController',
+                        'last_username' => $lastUsername,
+                        'error'         => $error,
+                    ]);                  
             }
     }
 

@@ -42,7 +42,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 255)]
     private $adresse;
 
-    #[ORM\Column(type: 'integer')]
+    #[ORM\Column(type: 'string')]
     private $codePostal;
 
     #[ORM\Column(type: 'string', length: 255)]
@@ -50,9 +50,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'boolean')]
     private $cgu;
-
-    #[ORM\Column(type: 'boolean')]
-    private $estAdmin;
 
     #[ORM\Column(type: 'datetime')]
     private $createdAt;
@@ -229,18 +226,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCgu(bool $cgu): self
     {
         $this->cgu = $cgu;
-
-        return $this;
-    }
-
-    public function isEstAdmin(): ?bool
-    {
-        return $this->estAdmin;
-    }
-
-    public function setEstAdmin(bool $estAdmin): self
-    {
-        $this->estAdmin = $estAdmin;
 
         return $this;
     }

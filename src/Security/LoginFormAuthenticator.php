@@ -30,28 +30,13 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
 
     public function authenticate(Request $request): Passport
     {
-        $email = $request->request->get('email', '');
-
+        $email = $request->request->get('_username');
         $request->getSession()->set(Security::LAST_USERNAME, $email);
-
-        // $dbname = "archhive";
-        // $dbuser = "root";
-        // $dbhost = "localhost";
-        // $dbpassword = "(zaOkfrac[XHy/GI";
-
-        // try {
-        //     $db = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpassword);
-        // } catch (PDOException $e) {
-        //     die("Erreur de connexion à la base de données : " . $e->getMessage());
-        // }
-        // $requete=query("SELECT * FROM user WHERE email = '".$email."' AND mot_de_passe = '".$password."'");
-        // $statement = $db->prepare($requete);
-        // $statement->bindParam("login", $_POST['login']);
-        // $statement->execute();
+        // dd($request);
 
         return new Passport(
         new UserBadge($email),
-        new PasswordCredentials($request->request->get('mot_de_passe', '')),
+        new PasswordCredentials($request->request->get('_password', '')),
         [
             new CsrfTokenBadge('authenticate', $request->request->get('_csrf_token')),
         ]);     

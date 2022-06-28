@@ -21,10 +21,10 @@ class UserController extends AbstractController
     public function index(User $user, int $id=1)
     {
       $currentUser = $this->getUser();
-      if($currentUser === $user)
-      {
-        return $this->redirectToRoute('currentUser');
-      }
+      // if($currentUser === $user)
+      // {
+      //   return $this->redirectToRoute('currentUser');
+      // }
         return $this->render('user/profile.html.twig', [
             'controller_name' => 'UserController',
         ]);

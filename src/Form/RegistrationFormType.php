@@ -82,7 +82,7 @@ class RegistrationFormType extends AbstractType
                     // Contrainte de longueur du mot de passe
                     New Length
                     (
-                        min: 10,
+                        min: 6,
                         max: 30,
                         minMessage: 'Minimum {{ limit }} caractères.',
                         maxMessage: 'Maximum {{ limit }} caractères.',

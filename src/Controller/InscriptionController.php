@@ -9,7 +9,9 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Cookie;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Security\LoginFormAuthenticator;
 use App\Form\RegistrationFormType;
@@ -20,7 +22,7 @@ class InscriptionController extends AbstractController
 {   
     //Page d'inscription : formulaire
     #[Route(path: '/register', name:'inscription', methods: ['GET', 'PUT', 'POST'])]
-    public function inscription(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, LoginFormAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
+    public function inscription(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, LoginFormAuthenticator $authenticator, EntityManagerInterface $entityManager, MailerInterface $mailer): Response
     {
         //Vérifier si l'utilisateur est déjà connecté ou non 
         if ($this->getUser())
@@ -42,13 +44,21 @@ class InscriptionController extends AbstractController
                         $register_form->get('mot_de_passe')->getData()
                     )
                 );
-                $user->setEstAdmin(false);
                 $entityManager->persist($user);
                 $entityManager->flush();
-                // do anything else you need here, like send an email
-
+                
                 //Message flash de confirmation d'inscription
-                $this->addFlash('success', 'Vous êtes bien inscrit !');
+                $this->addFlash('success', 'Vous êtes bien inscrit ! Vérifiez vos emails.');
+
+                //Envoi du mail de bienvenue
+                $email = new TemplatedEmail();
+                $email->to($user->getEmail())
+                ->subject('Bienvenue sur ArchHive !')
+                ->htmlTemplate('@email_templates/email_bienvenue.html.twig')
+                ->context([
+                'prenom_de_linscrits' => $user->getFirstname()
+                ]);
+                $mailer->send($email);
 
                 //Création du cookie de session de l'utilisateur
                 $cookie = Cookie::create('session')

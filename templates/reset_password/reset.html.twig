@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Confirmer la éinitialisation du mot de passe{% endblock %}
+
+{% block body %}
+
+<div class="bgreset"> </div>
+
+<div class="resetform">	
+
+    <div class="container" style="margin: 5%;">
+        <h3>Changer mon mot de passe : </h3>
+    </div>
+
+    <div class="container">
+        {{ form_start(resetForm) }}
+            {{ form_row(resetForm.mot_de_passe) }}
+            <button class="btn btn-primary">Réinitialiser</button>
+        {{ form_end(resetForm) }}
+    </div>
+</div>
+{% endblock %}

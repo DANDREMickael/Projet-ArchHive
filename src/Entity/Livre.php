@@ -19,7 +19,7 @@ class Livre
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $description_livre;
 
-    #[ORM\Column(type: 'datetime', nullable: true)]
+    #[ORM\Column(type: 'date', nullable: true)]
     private $date_parution;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]

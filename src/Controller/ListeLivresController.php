@@ -18,18 +18,6 @@ class ListeLivresController extends AbstractController
     #[Route(path: '/livres', name: 'listelivres', methods: ['GET'], defaults: ['title' => 'ArchHive'])]
     public function livres(EntityManagerInterface $em, LivreRepository $livreRepo, ManagerRegistry $doctrine)
     {
-        for ($i = 1; $i <= 10; $i++)
-        {
-            $livre = New Livre;
-            $livre->setTitre("Le titre du livre n°$i");
-            $livre->setDescriptionLivre("C'est un super livre ! Dommage que je ne sache pas lire :c")
-                  ->setDateParution(new \DateTime)
-                  ->setImage("http://placehold.it/350x150");
-            $em -> persist($livre);
-        }
-        $em -> flush($livre);
-
-        //$livreRepo ->findBy([Livre::class], ['titre' => 'DESC']);
 
         return $this->render('listelivres.html.twig', ['livre' => $livre]);
     }
