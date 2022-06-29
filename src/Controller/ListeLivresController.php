@@ -19,6 +19,6 @@ class ListeLivresController extends AbstractController
     public function livres(EntityManagerInterface $em, LivreRepository $livreRepo, ManagerRegistry $doctrine)
     {
 
-        return $this->render('listelivres.html.twig', ['livre' => $livre]);
+        return $this->render('listelivres.html.twig');
     }
 }
