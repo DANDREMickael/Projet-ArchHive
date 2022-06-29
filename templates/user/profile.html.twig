@@ -4,6 +4,19 @@
 
 {% block body %}
 
-<h1>Bonjour {{ app.user.fullName }}</h1>
+    <h1>Bonjour {{ app.user.fullName }} !</h1><br>
+
+    <div class="container">
+        <ul class="flex-column mb-auto">
+            <a href="{{path('parametres')}}" class="btn btn-primary mr-10">Modifier mes informations</a>
+            <a href="{{path('reset_current_user_password')}}" class="btn btn-primary mr-10"> Modifier mon mot de passe</a>
+        </ul>
+
+        <ul class="flex-column mb-auto">
+            <a href="{{path('parametres')}}" class="btn btn-primary mr-10">Mes emprunts</a>
+            <a href="{{path('reset_current_user_password')}}" class="btn btn-primary mr-10"> Faire une demande d'emprunt</a>
+        </ul>
+    </div>
+
 
 {% endblock %}

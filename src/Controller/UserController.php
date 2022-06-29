@@ -2,16 +2,19 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\User;
-use App\Form\UserType;
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
+use Doctrine\ORM\EntityManagerInterface;
+use App\Form\ChangePasswordFormType;
+use App\Repository\UserRepository;
+use App\Form\UserType;
+use App\Entity\User;
 
 #[Route(path: '/profile')]
 class UserController extends AbstractController
@@ -21,43 +24,11 @@ class UserController extends AbstractController
     public function index(User $user, int $id=1)
     {
       $currentUser = $this->getUser();
-      // if($currentUser === $user)
-      // {
-      //   return $this->redirectToRoute('currentUser');
-      // }
+
         return $this->render('user/profile.html.twig', [
             'controller_name' => 'UserController',
         ]);
     }
-
-  #[Route('/userprofile', name: 'current_user')]
-  #[IsGranted('IS_AUTHENTICATED_FULLY')]    //Permet de redemander une nouvelle fois le mot de passe de l'utilsateur pour qu'il puisse le modifier
-  public function userProfile(Request $request, EntityManagerInterface $em, UserPasswordHasherInterface $passwordHasher)
-  {
-    $user = $this->getUser();
-    $userForm = $this->createForm(UserType::class, $user);
-    $userForm->remove('mot_de_passe');
-    $userForm->add('newPassword', PasswordType::class, ['label' => 'Nouveau mot de passe', 'required' => false]);
-    $userForm->handleRequest($request);
-
-    if ($userForm->isSubmitted() && $userForm->isValid()) 
-    {
-      $newPassword = $user->getNewPassword();
-
-      if ($newPassword) 
-      {
-        $hash = $passwordHasher->hashPassword($user, $newPassword);
-        $user->setPassword($hash);
-      }
-
-      $em->flush();
-      $this->addFlash('success', 'Modifications sauvegardées !');
-    }
-
-    return $this->render('user/index.html.twig', [
-      'PWform' => $userForm->createView()
-    ]);
-  }
 
   #[Route('/settings', name: 'parametres')]
   #[IsGranted('ROLE_USER')]
@@ -67,4 +38,33 @@ class UserController extends AbstractController
       'controller_name' => 'UserController',
     ]);
   }
+
+  #[Route('/changemypass', name: 'reset_current_user_password')]
+    #[IsGranted('IS_AUTHENTICATED_FULLY')]    //Permet de redemander une nouvelle fois le mot de passe de l'utilsateur pour qu'il puisse le modifier
+    public function mdpprofile(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager) : Response
+    {
+        $user = $this->getUser();
+
+        $form = $this->createForm(ChangePasswordFormType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            // Encode(hash) the plain password, and set it.
+            $encodedPassword = $userPasswordHasher->hashPassword(
+                $user,
+                $form->get('mot_de_passe')->getData()
+            );
+
+            $user->setPassword($encodedPassword);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('profile');
+        }
+
+            return $this->render('reset_password/reset.html.twig', [
+            'resetForm' => $form->createView(),
+        ]);
+    }
+
 }
