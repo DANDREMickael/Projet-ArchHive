@@ -29,6 +29,10 @@ security:
             entry_point: form_login
             remember_me:
                 secret: '%kernel.secret'
+                lifetime: 28800 #Se souvenir de l'utilisateur pendant 8h
+                always_remember_me: true    #Case "se souvenir de moi" tout le temps cochée
+                token_provider:
+                    doctrine: true
             logout:
                 path: logout
                 # where to redirect after logout

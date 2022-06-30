@@ -178,6 +178,9 @@
             "bin/console"
         ]
     },
+    "symfony/css-selector": {
+        "version": "v6.1.0"
+    },
     "symfony/dependency-injection": {
         "version": "v6.1.0"
     },
@@ -480,6 +483,12 @@
     },
     "symfonycasts/verify-email-bundle": {
         "version": "v1.10.0"
+    },
+    "tijsverkoyen/css-to-inline-styles": {
+        "version": "2.2.4"
+    },
+    "twig/cssinliner-extra": {
+        "version": "v3.4.0"
     },
     "twig/extra-bundle": {
         "version": "v3.4.0"

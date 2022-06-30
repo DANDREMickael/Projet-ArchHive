@@ -1,8 +1,9 @@
 <main class="d-flex flex-nowrap">
 
 {% set route_locale = app.request.attributes.get("_route") %} {# Récupère le nom de la route de la page actuelle #}
-
-<div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px; height: 100vh;">
+<div class="row">
+<div class="col-sm-3 col-md-2">
+<div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px; height:90vh;">
     <a href="{{path('accueil')}}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
       <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
       <span class="fs-4">ArchHive</span>
@@ -11,7 +12,7 @@
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item">
         <a href="{{path('accueil')}}" class= "nav-link text-white
-          {{ route_locale == "index" ? " active" : "" }}"> {# Ajoute la classe active à la balise si la page correspond au lien du bouton #}
+          {{ route_locale == "accueil" ? " active" : "" }}"> {# Ajoute la classe active à la balise si la page correspond au lien du bouton #}
 
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="3#home"></use></svg>
           Accueil
@@ -86,6 +87,8 @@
       </div>
 
   </div>
+</div>
+</div>
 </main>
 
 <script src="/docs/5.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>

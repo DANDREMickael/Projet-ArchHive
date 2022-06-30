@@ -23,6 +23,7 @@ class UserController extends AbstractController
     #[IsGranted('ROLE_USER')]
     public function index(User $user, int $id=1)
     {
+      $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
       $currentUser = $this->getUser();
 
         return $this->render('user/profile.html.twig', [
@@ -39,32 +40,34 @@ class UserController extends AbstractController
     ]);
   }
 
-  #[Route('/changemypass', name: 'reset_current_user_password')]
-    #[IsGranted('IS_AUTHENTICATED_FULLY')]    //Permet de redemander une nouvelle fois le mot de passe de l'utilsateur pour qu'il puisse le modifier
-    public function mdpprofile(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager) : Response
-    {
-        $user = $this->getUser();
+  #[ Route('/changemypass', name: 'reset_current_user_password')]
+  public function mdpprofile(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
+  {
+    //Permet de redemander une nouvelle fois le mot de passe de l'utilsateur pour qu'il puisse le modifier
+    $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
-        $form = $this->createForm(ChangePasswordFormType::class);
-        $form->handleRequest($request);
+    $user = $this->getUser();
 
-        if ($form->isSubmitted() && $form->isValid()) {
+    $form = $this->createForm(ChangePasswordFormType::class);
+    $form->handleRequest($request);
 
-            // Encode(hash) the plain password, and set it.
-            $encodedPassword = $userPasswordHasher->hashPassword(
-                $user,
-                $form->get('mot_de_passe')->getData()
-            );
+    if ($form->isSubmitted() && $form->isValid()) {
 
-            $user->setPassword($encodedPassword);
-            $entityManager->flush();
+      // Encode(hash) the plain password, and set it.
+      $encodedPassword = $userPasswordHasher->hashPassword(
+        $user,
+        $form->get('mot_de_passe')->getData()
+      );
 
-            return $this->redirectToRoute('profile');
-        }
+      $user->setPassword($encodedPassword);
+      $entityManager->flush();
 
-            return $this->render('reset_password/reset.html.twig', [
-            'resetForm' => $form->createView(),
-        ]);
+      return $this->redirectToRoute('profile');
     }
+
+    return $this->render('reset_password/reset.html.twig', [
+      'resetForm' => $form->createView(),
+    ]);
+  }
 
 }

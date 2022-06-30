@@ -13,15 +13,12 @@
 	</div>
 {% endif %}
 
-<div class="container bgconnec"> </div>
-
-<div class="container connect">
-
-	<div class="container" style="margin: 5%;">
-		<h3>Connexion : identifiez-vous.</h3>
-	</div>
+<div class="pageconnection">
 
 	<div class="container">
+
+		<h3>Connexion : identifiez-vous.</h3>
+
 		<form action="{{ path('connexion') }}" method="post">
 
 			<div class="form-row">
@@ -50,17 +47,21 @@
 			{% endif %}
 
 			<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-			<button class="btn btn-primary mr-10">Connectez-vous !</button>
-			<small>
-				<a href="{{ path('inscription') }}">Pas encore inscrit(e) ?</a>
-			</small>
-			<br>
-			<small>
-      			<a href="{{ path('forgot_password_request') }}">Mot de passe oublié ?</a>
-      		</small>
+
+			<div class="options-login">
+				<button class="bouton-se-connecter btn btn-primary mr-10">Connectez-vous !</button>
+				<div class="liens-redirection">
+					<small>
+						<a href="{{ path('inscription') }}">Pas encore inscrit(e) ?</a>
+					</small>
+					<br>
+					<small>
+						<a href="{{ path('forgot_password_request') }}">Mot de passe oublié ?</a>
+					</small>
+				</div>
+			</div>
 		</form>
 	</div>
-</div>
 </div>
 
 {% endblock %}

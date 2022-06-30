@@ -16,37 +16,44 @@
         {% endblock %}
     </head>
 
-    <body>
-    
-        <div class="header">
-            {{include('partials/_header.html.twig')}}
-        </div>
+    <body class="mainbody">
 
-        <div class="sidebarandbody" style="display: flex; flex-direction: row; align-items: flex-start; min-height: 100vh;">
-            
-            <div class="sidebar">
-                {{include('partials/_sidebar.html.twig')}}
+        <!-- Interactions entre le header et la sidebar  -->
+        <div  class="headersidebar">
+
+            <div class="header fixed-top">
+                {{include('partials/_header.html.twig')}}
             </div>
 
-            <div class="container body">
+            <!-- Interactions entre la sidebar et le contenu-->
+            <div class="sidebarbody">
 
-                {% block body %}
+                <div class="sidebar">
+                    {{include('partials/_sidebar.html.twig')}}
+                </div>
 
-                    {% for label, messages in app.flashes %} {# Affichage message flash #}
-                        {% for message in messages %}
-                            <div class="flash-{{ label }}">
-                                {{ message }}
-                            </div>
-                        {% endfor %}
-                    {% endfor %}
+                <!-- Interactions entre le contenu et le footer -->
+                <div class="bodyfooter">
 
-                {% endblock %}
+                    <div class="allbodies">
+                        {% block body %}
+
+                            {% for label, messages in app.flashes %} {# Affichage message flash #}
+                                {% for message in messages %}
+                                    <div class="flash-{{ label }}">
+                                        {{ message }}
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+
+                        {% endblock %}
+                    </div>
+
+                    <div class="footer">
+                        {{include('partials/_footer.html.twig')}}
+                    </div>
+                </div>
             </div>
-            
-        </div>
-
-        <div class="footer">
-            {{include('partials/_footer.html.twig')}}
         </div>
     </body>  
 </html>

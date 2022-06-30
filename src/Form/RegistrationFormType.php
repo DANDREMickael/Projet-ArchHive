@@ -27,7 +27,7 @@ class RegistrationFormType extends AbstractType
             ->add('nom', TextType::class, 
             [
                 'label' => 'Votre NOM :',
-                'attr' => ['placeholder' => 'Exemple : Capasse'],
+                'attr' => ['placeholder' => 'Exemple : Capasse', 'maxlength' => 32],
                 'constraints' => 
                 [
                     //Contrainte de champs non vide
@@ -38,7 +38,7 @@ class RegistrationFormType extends AbstractType
             ->add('prenom', TextType::class, 
             [
                 'label' => 'Votre Prénom :',
-                'attr' => ['placeholder' => 'Exemple : Michel'],
+                'attr' => ['placeholder' => 'Exemple : Michel', 'maxlength' => 32],
                 'constraints' => 
                 [
                     New NotBlank(message: 'Vous n\'avez pas entré votre prénom'),
@@ -75,7 +75,7 @@ class RegistrationFormType extends AbstractType
             // this is read and encoded in the controller
             [
                 'mapped' => false,
-                'attr' => ['autocomplete' => 'new-password'],
+                'attr' => ['autocomplete' => 'new-password', 'maxlength' => 30],
                 'label' => 'Votre mot de passe :',
                 'constraints' => 
                 [
@@ -99,7 +99,7 @@ class RegistrationFormType extends AbstractType
             [
                 'trim' => true,
                 'label' => 'Votre Adresse :',
-                'attr' => ['placeholder' => 'N° de voie et Rue'],
+                'attr' => ['placeholder' => 'N° de voie et Rue', 'maxlength' => 255],
             ])
 
             ->add('codePostal', TextType::class,
@@ -113,7 +113,7 @@ class RegistrationFormType extends AbstractType
             [
                 'trim' => true,
                 'label' => 'Votre Ville :',
-                'attr' => ['placeholder' => 'Exemple : Boulogne'],
+                'attr' => ['placeholder' => 'Exemple : Boulogne', 'maxlength' => 255],
             ])
 
             ->add('cgu', CheckBoxType::class, 

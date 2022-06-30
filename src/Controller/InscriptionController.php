@@ -56,7 +56,7 @@ class InscriptionController extends AbstractController
                 ->subject('Bienvenue sur ArchHive !')
                 ->htmlTemplate('@email_templates/email_bienvenue.html.twig')
                 ->context([
-                'prenom_de_linscrits' => $user->getFirstname()
+                'prenom_de_linscrits' => $user->getPrenom()
                 ]);
                 $mailer->send($email);
 

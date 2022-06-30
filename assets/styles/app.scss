@@ -3,122 +3,186 @@
 @import '~@fortawesome/fontawesome-free/css/solid.css';
 @import '~@fortawesome/fontawesome-free/css/brands.css';
 
-.body{ 
+
+/*BASE.HTML.TWIG*/
+.mainbody{ 
+  background-image: url('../img/bibliblanche.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
   height:100vh; 
-  margin:0;
   display:flex; 
   flex-direction:column; 
+  align-items: stretch;
   flex-grow: 1;
 }
 
-.sidebarandbody{
+.headersidebar{
+  display: flex; 
+  flex-direction: column; 
+  align-content: space-between;
+  justify-content: flex-start; 
+  flex-grow: 1;
 
 }
 
-.inscrip{
-  filter:inherit;
-  position: relative;
-  color: white;
+    .navbar{ 
+      display: flex; 
+      align-self: flex-start;
+      min-height:5vh; 
+      background: rgb(2,0,36);
+      background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(51,126,134,1) 100%, rgba(224,255,255,1) 100%);
+    }
+
+.sidebarbody{
+  display:flex; 
+  flex-direction:row; 
+  align-items:stretch;
 }
 
-.connect{
-  filter:inherit;
-  position: relative;
-  color: white;
-}
+    .sidebar{
+      position: -webkit-sticky;
+      position: -moz-sticky;
+      position: -ms-sticky;
+      position: -o-sticky;
+      position: fixed;
+      padding: 70px 20px 70px 20px;
+    }
 
-.accueil{
-  filter:inherit;
-  position: relative;
-  color: white;
-}
+    .allbodies{
+      overflow-x: hidden;
+      overflow-y: auto;
+      flex-basis: auto;
+      max-height: 60vh;
+      padding-top: 20px;
+    }
 
-.bginscrip{
-  background-image: url('../img/bibliotheque.jpg');
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  max-width: 100%;
-  max-height: 100%;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  filter:blur(10px);
-}
+    @media (max-width: 768px) {
+      .sidebar{
+        visibility: hidden;
+      }
+    }
 
-.bgconnec{
-  background-image: url('../img/bibliotheque.jpg');
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  max-width: 100%;
-  max-height: 100%;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  filter:blur(10px);
-}
-
-.bgaccueil{
-  background-image: url('../img/bibliotheque.jpg');
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  max-width: 100%;
-  max-height: 100%;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  filter:blur(10px);
-}
-
-.brand{
-  margin-top: 25%;
-  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(51,126,134,1) 100%, rgba(224,255,255,1) 100%);;
-  font-size:100px;
-  color: #eee;
-  text-align: center;
-  align-self: center;
-  filter: inherit;
-}
-
-.slogan{
-  color: #eee;
-  background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(133,133,133,1) 100%);
-  font-size:50px;
-  text-align: center;
-}
-
-.navbar{ 
-  min-height:50px; 
-  // background:#e0ffff; 
-  background: rgb(2,0,36);
-  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(51,126,134,1) 100%, rgba(224,255,255,1) 100%);
-}
-
-.sidebar{
-  // opacity: 90%;
-  background: rgb(0,0,0);
-  background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(133,133,133,1) 100%);
-}
-
-.footer{ 
-  min-height:50px; 
-  background:PapayaWhip; 
-  margin-top:auto; 
+.bodyfooter{
+  display:flex; 
+  flex-direction:column; 
+  align-content:space-between;
   flex-grow:1;
-  opacity: 95%;
+  padding: 70px 40px 0px 320px; /* 320px = 280 (largeur de la sidebar) + 40 (padding) */
 }
 
-.login{
-  background: url('../img/bibliotheque.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  filter: blur(10px);
+    .footer{ 
+      min-height:5vh; 
+      max-height: 30vh;
+      background:PapayaWhip; 
+      margin-top:auto; 
+      opacity: 95%;
+    }
+
+
+/*BODIES*/
+.pageaccueil{
+  align-self: center;
+  flex-grow:1;
+}
+    .brand{
+      background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(51,126,134,1) 100%, rgba(224,255,255,1) 100%);;
+      font-size:100px;
+      color: #eee;
+      text-align: center;
+      align-self: center;
+    }
+
+    .slogan{
+      color: #eee;
+      background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(133,133,133,1) 100%);
+      font-size:50px;
+      text-align: center;
+    }
+
+.pagelistelivres{
+  align-self: center;
 }
 
+.pageinscription{
+  align-self: center;
+  max-width: 60%;
+}
+    .lien-redirection-vers-login{
+      padding-left:10px;
+    }
 
+.pageconnection{
+  align-self: center;
+  flex-grow:1;
+  max-width: 60%;
+}
+
+    .options-login{
+      display:flex; 
+      flex-direction:row; 
+    }
+
+        .bouton-se-connecter{
+
+        }
+
+        .liens-redirection{
+          flex-direction:column; 
+          padding-left:10px;
+        }
+
+
+/*MISE EN EPLACE DE BACKGROUNDS DISTINCT POUR CHAQUE PAGE (SUSPENDU)*/
+// .bgaccueil{
+//   background-image: url('../img/bibliotheque.jpg');
+//   position: absolute;
+//   width: 100%;
+//   height: 100%;
+//   max-width: 100%;
+//   max-height: 100%;
+//   background-repeat: no-repeat;
+//   background-size: cover;
+//   background-position: center;
+//   filter:blur(10px);
+// }
+
+// .bglistelivres{
+//   background-image: url('../img/bibliotheque.jpg');
+//   position: absolute;
+//   width: 100%;
+//   height: 100%;
+//   background-repeat: no-repeat;
+//   background-size: cover;
+//   background-position: center;
+//   filter:blur(10px);
+// }
+
+// .bginscrip{
+//   background-image: url('../img/bibliotheque.jpg');
+//   position: absolute;
+//   width: 100%;
+//   height: 100%;
+//   background-repeat: no-repeat;
+//   background-size: cover;
+//   background-position: center;
+//   filter:blur(10px);
+// }
+
+// .bgconnec{
+//   background-image: url('../img/bibliotheque.jpg');
+//   position: absolute;
+//   width: 100%;
+//   height: 100%;
+//   max-width: 100%;
+//   max-height: 100%;
+//   background-repeat: no-repeat;
+//   background-size: cover;
+//   background-position: center;
+//   filter:blur(10px);
+// }
+
+/*FORMULAIRES*/
 .red{
     color: red !important;
   }
