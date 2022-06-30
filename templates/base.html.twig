@@ -35,18 +35,22 @@
                 <!-- Interactions entre le contenu et le footer -->
                 <div class="bodyfooter">
 
-                    <div class="allbodies">
-                        {% block body %}
+                    <div class="allbodies" id="style-7">
+                    <div class="scrollbar">
+                        <div class="force-overflow">
+                            {% block body %}
 
-                            {% for label, messages in app.flashes %} {# Affichage message flash #}
-                                {% for message in messages %}
-                                    <div class="flash-{{ label }}">
-                                        {{ message }}
-                                    </div>
+                                {% for label, messages in app.flashes %} {# Affichage message flash #}
+                                    {% for message in messages %}
+                                        <div class="flash-{{ label }}">
+                                            {{ message }}
+                                        </div>
+                                    {% endfor %}
                                 {% endfor %}
-                            {% endfor %}
 
-                        {% endblock %}
+                            {% endblock %}
+                        </div>
+                    </div>
                     </div>
 
                     <div class="footer">
