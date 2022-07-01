@@ -29,7 +29,7 @@
     .navbar{ 
       display: flex; 
       align-self: flex-start;
-      min-height:5vh; 
+      max-height:6vh; 
       background: rgb(2,0,36);
       background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(51,126,134,1) 100%, rgba(224,255,255,1) 100%);
     }
@@ -38,6 +38,9 @@
   display:flex; 
   flex-direction:row; 
   align-items:stretch;
+  height:100vh;
+  padding-top: 8vh;
+  padding-bottom:2vh;
 }
 
     .sidebar{
@@ -46,15 +49,19 @@
       position: -ms-sticky;
       position: -o-sticky;
       position: fixed;
-      padding: 70px 20px 70px 20px;
+      padding-left:20px;
+      padding-right:20px;
     }
 
     .allbodies{
       overflow-x: hidden;
       overflow-y: auto;
-      flex-basis: auto;
-      max-height: 60vh;
+
+      min-height: 58vh;
+      max-height: 58vh;
+      padding-bottom:2vh;
       padding-top: 20px;
+      border-radius: 10px;
     }
         /*CUSTOMISATION DES SCROLLBARS*/
         #style-7::-webkit-scrollbar-track
@@ -94,45 +101,55 @@
   flex-direction:column; 
   align-content:space-between;
   flex-grow:1;
-  padding: 70px 40px 0px 320px; /* 320px = 280 (largeur de la sidebar) + 40 (padding) */
+  height:90vh;
+  padding-left:320px; /* 320px = 280 (largeur de la sidebar) + 40 (padding) */
+  padding-right:20px;
 }
 
-    .footer{ 
-      min-height:5vh; 
+    .footer{  
       max-height: 30vh;
-      background:PapayaWhip; 
-      margin-top:auto; 
+      min-height: 5vh;
       opacity: 95%;
+      position:fixed;
+      bottom:2vh;
+      min-width: 80%;
     }
 
 
 /*BODIES*/
 .pageaccueil{
-  align-self: center;
   flex-grow:1;
+  margin-top: 15%;
 }
     .brand{
       background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(51,126,134,1) 100%, rgba(224,255,255,1) 100%);;
-      font-size:100px;
+      font-size:10vh;
       color: #eee;
       text-align: center;
       align-self: center;
+      border-radius: 10px;
     }
 
     .slogan{
       color: #eee;
       background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(133,133,133,1) 100%);
-      font-size:50px;
+      font-size:5vh;
       text-align: center;
+      border-radius: 10px;
     }
 
 .pagelistelivres{
   align-self: center;
+  flex-grow:1;
+  max-width: 60%;
+  margin: 0 auto;
 }
 
 .pageinscription{
   align-self: center;
-  // max-width: 40%;
+  flex-grow:1;
+  max-width: 60%;
+  margin: 0 auto;
 }
     .lien-redirection-vers-login{
       padding-left:10px;
@@ -142,6 +159,7 @@
   align-self: center;
   flex-grow:1;
   max-width: 60%;
+  margin: 0 auto;
 }
 
     .options-login{

@@ -3,7 +3,7 @@
 {% set route_locale = app.request.attributes.get("_route") %} {# Récupère le nom de la route de la page actuelle #}
 <div class="row">
 <div class="col-sm-3 col-md-2">
-<div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px; height:90vh;">
+<div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px; height:90vh; border-radius: 10px;">
     <a href="{{path('accueil')}}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
       <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
       <span class="fs-4">ArchHive</span>
@@ -15,6 +15,7 @@
           {{ route_locale == "accueil" ? " active" : "" }}"> {# Ajoute la classe active à la balise si la page correspond au lien du bouton #}
 
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="3#home"></use></svg>
+          <i class="fa-solid fa-house" style="margin-right: 5px;"></i>
           Accueil
         </a>
       </li>
@@ -22,6 +23,7 @@
         <a href="{{path('listelivres')}}" class="nav-link text-white
           {{ route_locale == "listelivres" ? " active" : "" }}">
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
+          <i class="fa-solid fa-book" style="margin-right: 5px;"></i>
           Livres
         </a>
       </li>
@@ -31,6 +33,7 @@
           <a href="{{path('connexion')}}" class="nav-link text-white
             {{ route_locale == "connexion" ? " active" : "" }}">
             <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
+            <i class="fa-solid fa-angles-right" style="margin-right: 5px;"></i>
             Se connecter
           </a>
         </li>
@@ -38,6 +41,7 @@
           <a href="{{path('inscription')}}" class="nav-link text-white
             {{ route_locale == "inscription" ? " active" : "" }}">
               <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
+              <i class="fa-solid fa-right-to-bracket" style="margin-right: 5px;"></i>
               S'inscrire
           </a>
         </li>
@@ -66,7 +70,7 @@
 
         {%- if is_granted('ROLE_USER') -%}
           <a href="{{ path('profile') }}" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-          <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+          <img src="{{ asset('build/img/userpp.svg') }}" alt="" width="50" height="50" class="rounded-circle me-2">
           <strong>{{ app.user.prenom }}</strong>
           <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
             <li><a class="dropdown-item" href="{{path('parametres')}}">Paramètres</a></li>
@@ -76,7 +80,7 @@
           </ul>
         {%- else -%}
           <a href="{{ path('profile') }}" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-          <img src="{{ asset('build/img/ppdeconnecte.svg') }}" alt="" width="32" height="32" class="rounded-circle me-2">
+          <i class="fa-solid fa-user" width="50" height="50" class="rounded-circle me-2"></i>
           <strong>Utilisateur</strong>
         
           <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
