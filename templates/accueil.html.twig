@@ -1,7 +1,11 @@
 {% extends "base.html.twig" %}
 
 {% block title %}
-ArchHive : emprunt de livre facile et rapide.
+    {%- if is_granted('ROLE_USER') -%}
+        Consulter mes emprunts
+    {%- else -%}
+        ArchHive : emprunt de livre facile et rapide.
+    {%- endif -%}
 {% endblock %}
 
 {% block stylesheets %}
@@ -15,9 +19,20 @@ ArchHive : emprunt de livre facile et rapide.
 {% endblock %}
 
 {% block body %} 
+    {%- if is_granted('ROLE_USER') -%}
 
-<div class="pageaccueil">
-    <h1 class="brand"><span>ArchHive</span>
-    <p class="slogan">L'emprunt de livres simple et rapide !</p>
-</div>
- {% endblock %}
+        <h3> Mes emprunts : </h3>
+        <div class="pageemprunts">
+            <ul>
+                <li>Livre 1 </li>
+                <li>Livre 2 </li>
+                <li>Livre 3 </li>
+            </ul>
+        </div>
+    {%- else -%}
+        <div class="pageaccueil">
+            <h1 class="brand"><span>ArchHive</span>
+            <p class="slogan">L'emprunt de livres simple et rapide !</p>
+        </div>
+    {%- endif -%}
+{% endblock %}

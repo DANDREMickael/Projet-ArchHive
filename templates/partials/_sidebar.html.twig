@@ -48,8 +48,9 @@
       {%- else -%}
           <li>
           <a href="{{path('profile')}}" class="nav-link text-white
-            {{ route_locale == "connexion" ? " active" : "" }}">
+            {{ route_locale == "profile" ? " active" : "" }}">
             <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
+            <i class="fa-solid fa-address-card" style="margin-right: 5px;"></i>
             Mon profil
           </a>
         </li>
@@ -57,6 +58,7 @@
           <a href="{{path('parametres')}}" class="nav-link text-white
             {{ route_locale == "parametres" ? " active" : "" }}">
               <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
+              <i class="fa-solid fa-gear" style="margin-right: 5px;"></i>
               Paramètres
           </a>
         </li>

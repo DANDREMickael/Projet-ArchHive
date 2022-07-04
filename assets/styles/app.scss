@@ -21,11 +21,8 @@
 .headersidebar{
   display: flex; 
   flex-direction: column; 
-
   flex-grow: 1;
-
 }
-
     .navbar{ 
       display: flex; 
       align-self: flex-start;
@@ -33,6 +30,9 @@
       background: rgb(2,0,36);
       background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(51,126,134,1) 100%, rgba(224,255,255,1) 100%);
     }
+        .btnrecherchenav{
+          background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(51,126,134,1) 100%, rgba(224,255,255,1) 100%);
+        }
 
 .sidebarbody{
   display:flex; 
@@ -56,7 +56,6 @@
     .allbodies{
       overflow-x: hidden;
       overflow-y: auto;
-
       min-height: 58vh;
       max-height: 58vh;
       padding-bottom:2vh;
@@ -99,7 +98,7 @@
 .bodyfooter{
   display:flex; 
   flex-direction:column; 
-  align-content:space-between;
+  align-items:stretch;
   flex-grow:1;
   height:90vh;
   padding-left:320px; /* 320px = 280 (largeur de la sidebar) + 40 (padding) */
@@ -110,6 +109,10 @@
       max-height: 30vh;
       min-height: 5vh;
       opacity: 95%;
+      position: -webkit-sticky;
+      position: -moz-sticky;
+      position: -ms-sticky;
+      position: -o-sticky;
       position:fixed;
       bottom:2vh;
       min-width: 80%;

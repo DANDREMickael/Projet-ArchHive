@@ -6,7 +6,12 @@
 
 <div class="container">
     <h1> Mes paramètres</h1>
-    <p>Compte crée le {{ app.user.createdAt }}
+    {# <p>Compte crée le {{ app.user.createdAt }}</p> #}
+
+    {{ form_start(settingsform) }}
+    {{ form_rest(settingsform) }}
+    <button>Modifier</button>
+    {{ form_end(settingsform) }}
 <div>
 
 {% endblock %}

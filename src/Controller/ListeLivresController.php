@@ -18,7 +18,11 @@ class ListeLivresController extends AbstractController
     #[Route(path: '/livres', name: 'listelivres', methods: ['GET'], defaults: ['title' => 'ArchHive'])]
     public function livres(EntityManagerInterface $em, LivreRepository $livreRepo, ManagerRegistry $doctrine)
     {
-
-        return $this->render('listelivres.html.twig');
+        $query = $em->createQuery('SELECT l.titre FROM App\Entity\Livre l');
+        $livresdispos = $query->getResult();
+        return $this->render('listelivres.html.twig', 
+        [
+            //'livresdispos' => $livresdispos->createView(), 
+        ]);
     }
 }
