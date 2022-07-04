@@ -54,6 +54,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'datetime')]
     private $createdAt;
 
+    #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\File(mimeTypes: 'image/jpeg')]
+    private $image;
+
     public function __construct()
     {
         $this->setCreatedAt();
@@ -238,6 +242,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCreatedAt(): self
     {
         $this->createdAt = new \DateTime();
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }
