@@ -22,6 +22,9 @@ class Emprunt
     #[ORM\Column(type: 'boolean')]
     private $statut;
 
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'emprunt')]
+    private $user;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -59,6 +62,18 @@ class Emprunt
     public function setStatut(bool $statut): self
     {
         $this->statut = $statut;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

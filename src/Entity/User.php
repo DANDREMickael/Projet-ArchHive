@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use DateTimeImmutable;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -58,9 +60,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\File(mimeTypes: 'image/jpeg')]
     private $image;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: DemandeEmprunt::class)]
+    private $demande_emprunt;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Emprunt::class)]
+    private $emprunt;
+
     public function __construct()
     {
         $this->setCreatedAt();
+        $this->demande_emprunt = new ArrayCollection();
+        $this->emprunt = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -254,6 +264,66 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setImage(?string $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, DemandeEmprunt>
+     */
+    public function getDemandeEmprunt(): Collection
+    {
+        return $this->demande_emprunt;
+    }
+
+    public function addDemandeEmprunt(DemandeEmprunt $demandeEmprunt): self
+    {
+        if (!$this->demande_emprunt->contains($demandeEmprunt)) {
+            $this->demande_emprunt[] = $demandeEmprunt;
+            $demandeEmprunt->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDemandeEmprunt(DemandeEmprunt $demandeEmprunt): self
+    {
+        if ($this->demande_emprunt->removeElement($demandeEmprunt)) {
+            // set the owning side to null (unless already changed)
+            if ($demandeEmprunt->getUser() === $this) {
+                $demandeEmprunt->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Emprunt>
+     */
+    public function getEmprunt(): Collection
+    {
+        return $this->emprunt;
+    }
+
+    public function addEmprunt(Emprunt $emprunt): self
+    {
+        if (!$this->emprunt->contains($emprunt)) {
+            $this->emprunt[] = $emprunt;
+            $emprunt->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEmprunt(Emprunt $emprunt): self
+    {
+        if ($this->emprunt->removeElement($emprunt)) {
+            // set the owning side to null (unless already changed)
+            if ($emprunt->getUser() === $this) {
+                $emprunt->setUser(null);
+            }
+        }
 
         return $this;
     }

@@ -45,8 +45,8 @@
       </ul>
       
       {%- if (route_locale == "listelivres") -%}
-        <form class="d-flex">
-          <input class="form-control me-sm-2" type="text" placeholder="Rechercher">
+        <form class="d-flex" method="post" action="{{ path('listelivres') }}">
+          <input class="form-control me-sm-2" type="text" name="inputrecherche" placeholder="Rechercher">
           <button class="btnrecherchenav btn btn-secondary my-2 my-sm-0" type="submit">Rechercher</button>
         </form>
       {%- else -%}

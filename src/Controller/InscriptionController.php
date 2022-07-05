@@ -64,7 +64,7 @@ class InscriptionController extends AbstractController
                 //Création du cookie de session de l'utilisateur
                 $cookie = Cookie::create('session')
                     ->withValue('est_connecte')
-                    ->withExpires(strtotime('Fri, 8-July-2022 17:00:00 GMT'))
+                    ->withExpires(strtotime('New DateTime'))
                     ->withHttpOnly(true)
                     ->withSecure(true);
 

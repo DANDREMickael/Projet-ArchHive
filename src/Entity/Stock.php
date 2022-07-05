@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\StockRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: StockRepository::class)]
@@ -15,6 +17,14 @@ class Stock
 
     #[ORM\Column(type: 'integer')]
     private $quantite;
+
+    #[ORM\OneToMany(mappedBy: 'stock', targetEntity: Livre::class)]
+    private $livres;
+
+    public function __construct()
+    {
+        $this->livres = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -29,6 +39,36 @@ class Stock
     public function setQuantite(int $quantite): self
     {
         $this->quantite = $quantite;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Livre>
+     */
+    public function getLivres(): Collection
+    {
+        return $this->livres;
+    }
+
+    public function addLivre(Livre $livre): self
+    {
+        if (!$this->livres->contains($livre)) {
+            $this->livres[] = $livre;
+            $livre->setStock($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLivre(Livre $livre): self
+    {
+        if ($this->livres->removeElement($livre)) {
+            // set the owning side to null (unless already changed)
+            if ($livre->getStock() === $this) {
+                $livre->setStock(null);
+            }
+        }
 
         return $this;
     }

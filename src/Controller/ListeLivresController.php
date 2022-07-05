@@ -15,14 +15,11 @@ class ListeLivresController extends AbstractController
 { 
     
     //Page des livres disponibles à l'empreint
-    #[Route(path: '/livres', name: 'listelivres', methods: ['GET'], defaults: ['title' => 'ArchHive'])]
-    public function livres(EntityManagerInterface $em, LivreRepository $livreRepo, ManagerRegistry $doctrine)
+    #[Route(path: '/livres', name: 'listelivres', methods: ['GET'])]
+    public function livres(EntityManagerInterface $em, LivreRepository $livreRepo, ManagerRegistry $doctrine, Request $request) : Response
     {
-        $query = $em->createQuery('SELECT l.titre FROM App\Entity\Livre l');
-        $livresdispos = $query->getResult();
-        return $this->render('listelivres.html.twig', 
-        [
-            //'livresdispos' => $livresdispos->createView(), 
+        return $this->render('listelivres.html.twig', [
+            'livres' => $livreRepo->findAll(),
         ]);
     }
 }

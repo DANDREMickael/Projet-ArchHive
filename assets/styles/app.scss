@@ -142,17 +142,35 @@
     }
 
 .pagelistelivres{
-  align-self: center;
-  flex-grow:1;
   max-width: 60%;
   margin: 0 auto;
 }
+  h3{
+    color: white;
+    text-shadow: black 1px 1px, black -1px 1px, black -1px -1px, black 1px -1px;
+  }
+  .unLivre{
+    align-items: baseline;
+    height: 250px;
+  }
+    .pDescLivre{
+      text-align: justify;
+    }
+    .imgLivre{
+      height: 400px; 
+      width: 250px; 
+      margin: 20px 20px 20px 0px;
+    }
 
 .pageinscription{
   align-self: center;
   flex-grow:1;
   max-width: 60%;
   margin: 0 auto;
+  h3{
+    color: white;
+    text-shadow: black 1px 1px, black -1px 1px, black -1px -1px, black 1px -1px;
+  }
 }
     .lien-redirection-vers-login{
       padding-left:10px;
@@ -163,6 +181,10 @@
   flex-grow:1;
   max-width: 60%;
   margin: 0 auto;
+  h3{
+    color: white;
+    text-shadow: black 1px 1px, black -1px 1px, black -1px -1px, black 1px -1px;
+  }
 }
 
     .options-login{
@@ -264,7 +286,7 @@
   
     .btn{
       padding: 10px 15px;
-      color: white;
+      color: black;
       border: 0;
       border-radius: 3px;
       background-color: #3498db;

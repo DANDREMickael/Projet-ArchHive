@@ -16,6 +16,9 @@ class DemandeEmprunt
     #[ORM\Column(type: 'datetime')]
     private $date_emprunt;
 
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'demande_emprunt')]
+    private $user;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -29,6 +32,18 @@ class DemandeEmprunt
     public function setDateEmprunt(\DateTimeInterface $date_emprunt): self
     {
         $this->date_emprunt = $date_emprunt;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

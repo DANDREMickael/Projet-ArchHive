@@ -9,21 +9,22 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Image</th>
                 <th>Titre</th>
                 <th>Description_livre</th>
                 <th>Date_parution</th>
-                <th>Image</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
+        
         {% for livre in livres %}
             <tr>
                 <td>{{ livre.id }}</td>
+                <td><img src='{{ livre.image }}' style='height: 250px; width: 150px;'></img></td>
                 <td>{{ livre.titre }}</td>
                 <td>{{ livre.descriptionLivre }}</td>
-                <td>{{ livre.dateParution ? livre.dateParution|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ livre.image }}</td>
+                <td>{{ livre.dateParution ? livre.dateParution|date('Y-m-d') : '' }}</td>
                 <td>
                     <a href="{{ path('app_livre_show', {'id': livre.id}) }}">show</a>
                     <a href="{{ path('app_livre_edit', {'id': livre.id}) }}">edit</a>
