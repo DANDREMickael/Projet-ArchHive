@@ -58,9 +58,9 @@
       overflow-y: auto;
       min-height: 58vh;
       max-height: 58vh;
-      padding-bottom:2vh;
       padding-top: 20px;
       border-radius: 10px;
+      background-color: rgba(128, 128, 128, 0.5);
     }
         /*CUSTOMISATION DES SCROLLBARS*/
         #style-7::-webkit-scrollbar-track
@@ -141,25 +141,31 @@
       border-radius: 10px;
     }
 
+h3{
+  color: white;
+  text-shadow: black 1px 1px, black -1px 1px, black -1px -1px, black 1px -1px;
+}
+
 .pagelistelivres{
   max-width: 60%;
   margin: 0 auto;
+  border-radius: 10px;
 }
-  h3{
-    color: white;
-    text-shadow: black 1px 1px, black -1px 1px, black -1px -1px, black 1px -1px;
-  }
+
   .unLivre{
-    align-items: baseline;
-    height: 250px;
+    height: 400;
+    margin: 20px;
   }
     .pDescLivre{
       text-align: justify;
+      overflow: auto;
+      height: 350px;
     }
     .imgLivre{
       height: 400px; 
       width: 250px; 
       margin: 20px 20px 20px 0px;
+      border-radius: 10px;
     }
 
 .pageinscription{

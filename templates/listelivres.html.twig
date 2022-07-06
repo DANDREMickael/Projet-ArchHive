@@ -6,33 +6,32 @@ Liste des livres diponibles en ce moment.
 
 {% block body %} 
 
+<h3> Nos livres en stock : </h3><br>
 <div class="pagelistelivres">
 
-    <h3> Nos livres en stock : </h3>
         {% for livre in livres %}
+        <div class="unLivre">
         <table>
-            <div class="unLivre">
 
                 <thead>
                     <tr>
-                        <th scope="col">{{ livre.titre }}</th>
+                        {# <th scope="col"><h4>{{ livre.titre }}</h4></th> #}
                     </tr>
                 </thead>
 
                 <tr>
                     <td><img class="imgLivre" src='{{ livre.image }}'></img></td>
 
-                    <td><p class="pDescLivre">{{ livre.descriptionLivre }}</p></td>
-
-                    <td>{{ livre.dateParution ? livre.dateParution|date('d/m/Y') : '' }}</td>
+                    <td><p class="pDescLivre" id="style-7">{{ livre.descriptionLivre }}</p></td>
                 </tr>
 
                 <tr>
                     <th><a href="{{path('emprunts')}}" class="btn btn-primary mr-10"> Emprunter </a></th>
+                    <td>Date de parution : {{ livre.dateParution ? livre.dateParution|date('d/m/Y') : '' }}</td>
                 </tr>
-            </div>
-            <br>
         </table>
+        </div>
+            <br>
         {% else %}
             <tr>
                 <h1>Aucun livre disponible pour l'instant</h1>
