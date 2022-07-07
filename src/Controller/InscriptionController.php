@@ -78,7 +78,7 @@ class InscriptionController extends AbstractController
 
             if ($register_form->isSubmitted() && !$register_form->isValid()) {
                 //Message flash d'erreur
-                $this->addFlash('error', 'Informations incorrectes. Veuillez réessayer.');
+                $this->addFlash('danger', 'Informations incorrectes. Veuillez réessayer.');
             }
 
             return $this->render('security/inscription.html.twig', [

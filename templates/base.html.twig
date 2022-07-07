@@ -39,15 +39,21 @@
                     <div class="allbodies" id="style-7">
                         <div class="scrollbar">
                             <div class="force-overflow">
+                                {% for label, messages in app.flashes %} {# Affichage message flash #}
+                                    {% for message in messages %}
+                                            <div class="alert alert-{{ label }} alert-dismissible fade show" role="alert">
+                                                {{ message }}
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                            </div>
+
+                                        <div class="flash-{{ label }}">
+                                            
+                                        </div>
+                                    {% endfor %}
+                                {% endfor %}
                                 {% block body %}
 
-                                    {% for label, messages in app.flashes %} {# Affichage message flash #}
-                                        {% for message in messages %}
-                                            <div class="flash-{{ label }}">
-                                                {{ message }}
-                                            </div>
-                                        {% endfor %}
-                                    {% endfor %}
+                                    
 
                                 {% endblock %}
                             </div>
