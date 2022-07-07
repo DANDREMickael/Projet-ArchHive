@@ -27,22 +27,13 @@ class RegistrationFormType extends AbstractType
             ->add('nom', TextType::class, 
             [
                 'label' => 'Votre NOM :',
-                'attr' => ['placeholder' => 'Exemple : Capasse', 'maxlength' => 32],
-                'constraints' => 
-                [
-                    //Contrainte de champs non vide
-                    New NotBlank(message: 'Vous n\'avez pas entré votre nom'),
-                ]
+                'attr' => ['placeholder' => 'Exemple : Capasse', 'maxlength' => 16],
             ])
 
             ->add('prenom', TextType::class, 
             [
                 'label' => 'Votre Prénom :',
-                'attr' => ['placeholder' => 'Exemple : Michel', 'maxlength' => 32],
-                'constraints' => 
-                [
-                    New NotBlank(message: 'Vous n\'avez pas entré votre prénom'),
-                ]
+                'attr' => ['placeholder' => 'Exemple : Michel', 'maxlength' => 16],
             ])
 
             ->add('dateNaissance', BirthdayType::class, 
@@ -57,6 +48,7 @@ class RegistrationFormType extends AbstractType
                 'attr' => ['placeholder' => 'Exemple : michelcapasse@gmail.com'],
                 'constraints' => 
                 [
+                    //Contrainte de champs non vide
                     New NotBlank
                     (
                         message: 'Adresse email nécessaire pour s\'inscrire'
@@ -109,10 +101,10 @@ class RegistrationFormType extends AbstractType
                 'attr' => ['placeholder' => 'Exemple : 62200', 'maxlength' => 5],
             ])
 
-            ->add('ville', CountryType::class,
+            ->add('ville', TextType::class,
             [
                 'trim' => true,
-                'label' => 'Votre Ville :',
+                'label' => 'Votre pays :',
                 'attr' => ['placeholder' => 'Exemple : Boulogne', 'maxlength' => 255],
             ])
 

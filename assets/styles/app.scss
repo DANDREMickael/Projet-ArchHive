@@ -207,6 +207,24 @@ h3{
           padding-left:10px;
         }
 
+.mainprofil{
+  display:flex; 
+  flex-direction: column;
+}
+
+    .boite_infos_user{
+      flex-direction: row;
+    }
+
+        .userimage{
+
+        }
+        
+        .infos_user {
+          flex-direction: row;
+
+        }
+
 
 /*MISE EN EPLACE DE BACKGROUNDS DISTINCT POUR CHAQUE PAGE (SUSPENDU)*/
 // .bgaccueil{

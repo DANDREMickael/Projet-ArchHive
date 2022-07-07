@@ -4,17 +4,39 @@
 
 {% block body %}
 
-<div class="container">
+<div class="mainprofil container">
     <h1>Bonjour {{ app.user.fullName }} !</h1><br>
 
-        <div class="container">
-            <ul class="flex-column mb-auto">
-                <a href="{{path('parametres')}}" class="btn btn-primary mr-10">Modifier mes informations</a>
-                <a href="{{path('reset_current_user_password')}}" class="btn btn-primary mr-10"> Modifier mon mot de passe</a>
-                <a href="{{path('accueil')}}" class="btn btn-primary mr-10">Mes emprunts</a>
-                <a href="{{path('emprunts')}}" class="btn btn-primary mr-10"> Faire une demande d'emprunt</a>
-            </ul>
+    <div class="boite_infos_user container">
+
+        <div class="userimage">
+            <p> Compte crée le <td>{{ app.user.createdAt|date('d/m/Y') }}</td></p>
+            <img src="{{ asset('uploads/imgprofile/' ~ app.user.image) }}" width="150" height="150" class="rounded-circle me-2"></img>
         </div>
+
+        <div class="infos_user">
+            <div class="usermaininfos container">
+                <p> Nom : {{ app.user.nom}} </p>
+                <p> Prénom : {{ app.user.prenom}} </p>
+                <p> Date de naissance : {{ app.user.dateNaissance|date('d/m/Y')}} </p>
+            </div>
+
+            <div class="usercoordonnees container">
+                <p> Adresse : {{ app.user.adresse}} </p>
+                <p> Code postal : {{ app.user.codePostal}} </p>
+                <p> Ville : {{ app.user.ville}} </p>
+            </div>
+        </div>
+</div>
+
+    <div class="container">
+        <ul class="flex-column mb-auto">
+            <a href="{{path('parametres')}}" class="btn btn-primary mr-10">Modifier mes informations</a>
+            <a href="{{path('reset_current_user_password')}}" class="btn btn-primary mr-10"> Modifier mon mot de passe</a>
+            <a href="{{path('accueil')}}" class="btn btn-primary mr-10">Mes emprunts</a>
+            <a href="{{path('emprunts')}}" class="btn btn-primary mr-10"> Faire une demande d'emprunt</a>
+        </ul>
+    </div>
 <div>
     
 {% endblock %}

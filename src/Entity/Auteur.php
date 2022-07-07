@@ -15,9 +15,6 @@ class Auteur
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'integer')]
-    private $id_auteur;
-
     #[ORM\Column(type: 'string', length: 32)]
     private $nom_auteur;
 
@@ -33,23 +30,6 @@ class Auteur
     public function __construct()
     {
         $this->livres = new ArrayCollection();
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    public function getIdAuteur(): ?int
-    {
-        return $this->id_auteur;
-    }
-
-    public function setIdAuteur(int $id_auteur): self
-    {
-        $this->id_auteur = $id_auteur;
-
-        return $this;
     }
 
     public function getNomAuteur(): ?string

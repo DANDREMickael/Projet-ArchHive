@@ -32,10 +32,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     private $newPassword;
 
-    #[ORM\Column(type: 'string', length: 32, nullable: true)]
+    #[ORM\Column(type: 'string', length: 16, nullable: true)]
     private $nom;
 
-    #[ORM\Column(type: 'string', length: 32, nullable: true)]
+    #[ORM\Column(type: 'string', length: 16, nullable: true)]
     private $prenom;
 
     #[ORM\Column(type: 'datetime')]
@@ -57,7 +57,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $createdAt;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\File(mimeTypes: 'image/jpeg')]
     private $image;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: DemandeEmprunt::class)]

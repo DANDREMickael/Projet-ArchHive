@@ -17,6 +17,7 @@ class LivreType extends AbstractType
             ->add('description_livre')
             ->add('date_parution', DateType::class)
             ->add('image')
+            ->add('stock')
         ;
     }
 

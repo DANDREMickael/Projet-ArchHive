@@ -44,7 +44,7 @@ class InscriptionController extends AbstractController
                         $register_form->get('mot_de_passe')->getData()
                     )
                 );
-                $user->setImage('build/ppuser.png');
+                $user->setImage('userpp.svg');
                 $entityManager->persist($user);
                 $entityManager->flush();
                 

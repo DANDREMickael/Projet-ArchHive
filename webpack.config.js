@@ -16,16 +16,17 @@ Encore
     //.setManifestKeyPrefix('build/')
 
         .copyFiles({
-            from: './assets/img',
+            from: './assets/img',       //Le dossier depuis lequel les fichiers seront copié
 
             // optional target path, relative to the output dir
-            to: 'img/[path][name].[ext]',
+            to: 'img/[path][name].[ext]',       //Permet de désigner où les fichiers seront copiés et éventuellement de modifier le chemin, le nom ou l'extension lors de la copie
+        
      
             // if versioning is enabled, add the file hash too
             //to: 'img/[path][name].[hash:8].[ext]',
      
             // only copy files matching this pattern
-            //pattern: /\.(png|jpg|jpeg)$/
+            pattern: /\.(png|jpg|jpeg|svg)$/        //Permet de sélectionner les fichiers à copier (ici les fichiers finissant par .png, .jpg, .jpeg ou .svg)
         })
 
     /*
@@ -34,19 +35,8 @@ Encore
      * Each entry will result in one JavaScript file (e.g. app.js)
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
-    .addEntry('app', './assets/app.ts')
-
-    Encore.setOutputPath('public/build/')
-    .setPublicPath('/build')
+    .addEntry('app', './assets/app.js')
     .addEntry('accueil', './assets/accueil.ts')
-    .splitEntryChunks()
-    .enableSingleRuntimeChunk()
-    .cleanupOutputBeforeBuild()
-    .copyFiles({
-    from: './assets/img',       //Le dossier depuis lequel les fichiers seront copié
-    pattern: /.(png|jpg|jpeg|svg)$/,        //Permet de sélectionner les fichiers à copier (ici les fichiers finissant par .png, .jpg, .jpeg ou .svg)
-    to: 'img/[path][name].[ext]',           //Permet de désigner où les fichiers seront copiés et éventuellement de modifier le chemin, le nom ou l'extension lors de la copie
-})
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     //.enableStimulusBridge('./assets/controllers.json')
